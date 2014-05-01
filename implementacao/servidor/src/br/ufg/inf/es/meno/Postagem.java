@@ -30,6 +30,7 @@ public class Postagem {
 			conn.setDoOutput(true);
 
 			//Convertendo a mensagem para JSON
+			System.out.println("Convertendo a mensagem para JSON");
 		   	ObjectMapper mapper = new ObjectMapper();
 			DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
 			mapper.writeValue(wr, mensagem);

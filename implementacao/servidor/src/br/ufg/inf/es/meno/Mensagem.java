@@ -12,10 +12,10 @@ public class Mensagem implements Serializable{
 	private List<String> registration_ids;
 	private Map<String,String> data;
 	
-	/*public Mensagem(String regId, String title, String message){
+	public Mensagem(String regId, String title, String message){
 		this.addRegId(regId);
 		this.createData(title, message);
-	}*/
+	}
 
 	public void addRegId(String regId){
 		if(registration_ids == null)
