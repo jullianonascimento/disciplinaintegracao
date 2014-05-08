@@ -16,6 +16,10 @@ public class Mensagem implements Serializable{
 		this.addRegId(regId);
 		this.createData(title, message);
 	}
+	
+	public Mensagem(String title, String message){
+		this.createData(title, message);
+	}
 
 	public void addRegId(String regId){
 		if(registration_ids == null)
