@@ -5,23 +5,52 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="19" />
 
+    <permission
+        android:name="br.ufg.inf.es.meno.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="br.ufg.inf.es.meno.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
         <activity
             android:name="br.ufg.inf.es.meno.Principal"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name="br.ufg.inf.es.meno.TelaMensagem"
+            android:label="@string/title_activity_tela_mensagem" >
+        </activity>
+        
+        <service android:name="br.ufg.inf.es.meno.GCMIntentService"></service>
+        
+        <receiver 
+            android:name="com.google.android.gcm.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                
+                <category android:name="br.ufg.inf.es.meno" />
+            </intent-filter>
+        </receiver>
+        
     </application>
 
 </manifest>
