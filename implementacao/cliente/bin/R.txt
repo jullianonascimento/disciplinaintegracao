@@ -307,7 +307,6 @@ int id default_activity_button 0x7f06002b
 int id dialog 0x7f060012
 int id disableHome 0x7f06000c
 int id dropdown 0x7f060013
-int id editTextRegID 0x7f060043
 int id edit_query 0x7f060033
 int id end 0x7f060016
 int id exibeMensagem 0x7f060045
@@ -350,6 +349,7 @@ int id split_action_bar 0x7f060021
 int id submit_area 0x7f06003c
 int id tabMode 0x7f060006
 int id terrain 0x7f060003
+int id textRegID 0x7f060043
 int id textView1 0x7f060041
 int id title 0x7f06002e
 int id top_action_bar 0x7f060023
@@ -430,6 +430,7 @@ int string common_signin_button_text 0x7f070012
 int string common_signin_button_text_long 0x7f070013
 int string em_branco 0x7f07002f
 int string hello_world 0x7f070029
+int string hint_regid 0x7f070030
 int string location_client_powered_by_google 0x7f07001a
 int string mensagem_recebida 0x7f07002e
 int string obter_regid 0x7f07002b

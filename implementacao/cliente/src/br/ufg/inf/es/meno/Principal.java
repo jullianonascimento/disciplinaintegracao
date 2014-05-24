@@ -1,46 +1,46 @@
 package br.ufg.inf.es.meno;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gcm.GCMRegistrar;
 
 public class Principal extends Activity {
-	
-	String TAG = "Principal::Activity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_principal);
-		
+
 		GCMRegistrar.checkDevice(this);
 		GCMRegistrar.checkManifest(this);
-		
-		// Register Device Button
-				Button regbtn = (Button) findViewById(R.id.botaoObterRegID);
-
-				regbtn.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Log.i(TAG, "Registering device");
-						// Retrive the sender ID from GCMIntentService.java
-						// Sender ID will be registered into GCMRegistrar
-						GCMRegistrar.register(Principal.this,
-								GCMIntentService.SENDER_ID);
-					}
-				});
 	}
-	
-	/*public void obtemRegID(View v){
+
+	public void registraDispositivo(View v) {
+		Context context = Principal.this;
 		Log.i("MeNo-Cliente", "Registrando o dispositivo...");
-		GCMRegistrar.register(Principal.this, MeNoIntentService.SENDER_ID);
-	}*/
+		GCMRegistrar.register(context, GCMIntentService.SENDER_ID);
+
+		if (GCMRegistrar.isRegistered(context)) {
+			String regID = GCMRegistrar.getRegistrationId(context);
+			mostraRegID(regID);
+			Toast.makeText(context,
+					"Dê um clique longo sobre o Registro para selecioná-lo e copiá-lo",
+					Toast.LENGTH_LONG).show();
+		}
+	}
+
+	public void mostraRegID(String regID) {
+		TextView textRegID = (TextView) findViewById(R.id.textRegID);
+		textRegID.setText(regID);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

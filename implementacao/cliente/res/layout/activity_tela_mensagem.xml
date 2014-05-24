@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:text="@string/mensagem_recebida"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_margin="15dp" />
+        android:layout_margin="15dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/exibeMensagem"
