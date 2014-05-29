@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
 import android.util.Log;
-import android.widget.EditText;
 
 import com.google.android.gcm.GCMBaseIntentService;
 
