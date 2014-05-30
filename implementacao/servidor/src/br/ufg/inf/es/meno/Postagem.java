@@ -14,19 +14,14 @@ public class Postagem {
 	public static void enviaMensagem(String apiKey, Mensagem mensagem){
 		
 		try{
-			// URL do gcm para envio
+			//URL do GCM para envio
 			URL url = new URL("https://android.googleapis.com/gcm/send");
 						
-			//Abrindo a conexão
+			//Configurando a conexão
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-						
-			//Especificando o método POST
 			conn.setRequestMethod("POST");
-			
-			//Configurando os headers 
 			conn.setRequestProperty("Content-Type", "application/json");
 			conn.setRequestProperty("Authorization", "key="+apiKey);
-			
 			conn.setDoOutput(true);
 
 			//Convertendo a mensagem para JSON
@@ -54,7 +49,6 @@ public class Postagem {
 			}
 			in.close();
 	 
-			//Imprimindo a resposta
 			System.out.println(response.toString());
 					
 			} catch (MalformedURLException e) {

@@ -24,6 +24,8 @@ public class Principal {
 		do {
 			System.out.println("\n1. Enviar mensagem para um assinante");
 			System.out.println("2. Enviar mensagem para todos os assinantes");
+			System.out.println("3. Listar os assinantes");
+			System.out.println("4. Enviar mensagem para vários assinantes");
 			System.out.println("0. Sair");
 			System.out.println("Digite a opção desejada:");
 			opcao = leNumero.nextInt();
@@ -37,6 +39,14 @@ public class Principal {
 				menuEnviaParaTodos();
 				break;
 			}
+			case 3: {
+				menuListarAssinantes();
+				break;
+			}
+			case 4: {
+				menuEnviaParaVarios();
+				break;
+			}
 			case 0: {
 				System.out.println("Finalizando aplicação.");
 				break;
@@ -48,6 +58,36 @@ public class Principal {
 
 		} while (opcao != 0);
 
+	}
+
+	private static void menuEnviaParaVarios() {
+		Scanner leString = new Scanner(System.in);
+
+		System.out
+				.println("Digite o nome dos assinantes seguido por enter ou digite 0 para terminar: ");
+
+		String nomeAssinante = leString.nextLine();
+		Mensagem mensagem = new Mensagem();
+
+		while (!nomeAssinante.equals("0")) {
+			String regId = Persistencia.buscaRegIdPorNome(nomeAssinante);
+			mensagem.addRegId(regId);
+
+			nomeAssinante = leString.nextLine();
+		}
+
+		System.out.println("Digite uma mensagem: ");
+		String textoMensagem = leString.nextLine();
+
+		mensagem.createData("Titulo Padrao", textoMensagem);
+
+		System.out.println("Enviando Mensagem .....");
+		Postagem.enviaMensagem(APIKEY, mensagem);
+
+	}
+
+	private static void menuListarAssinantes() {
+		Persistencia.listarAssinantes();
 	}
 
 	private static void menuEnviaParaTodos() {

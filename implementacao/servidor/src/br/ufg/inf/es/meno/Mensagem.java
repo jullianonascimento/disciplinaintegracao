@@ -11,6 +11,11 @@ public class Mensagem implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private List<String> registration_ids;
 	private Map<String,String> data;
+	private int time_to_live = 86400; //24 horas
+	
+	public Mensagem() {
+		
+	}
 	
 	public Mensagem(String regId, String title, String message){
 		this.addRegId(regId);
@@ -49,5 +54,13 @@ public class Mensagem implements Serializable{
 
 	public void setData(Map<String, String> data) {
 		this.data = data;
+	}
+
+	public int getTime_to_live() {
+		return time_to_live;
+	}
+
+	public void setTime_to_live(int time_to_live) {
+		this.time_to_live = time_to_live;
 	}
 }
