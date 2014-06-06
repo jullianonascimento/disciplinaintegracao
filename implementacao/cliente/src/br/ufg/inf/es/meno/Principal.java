@@ -2,17 +2,16 @@ package br.ufg.inf.es.meno;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gcm.GCMRegistrar;
 
 public class Principal extends Activity {
+
+	private final String TAG = "MeNo-Cliente";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,27 +20,42 @@ public class Principal extends Activity {
 
 		GCMRegistrar.checkDevice(this);
 		GCMRegistrar.checkManifest(this);
+
 	}
 
 	public void registraDispositivo(View v) {
 		Context context = Principal.this;
-		Log.i("MeNo-Cliente", "Registrando o dispositivo...");
-		GCMRegistrar.register(context, GCMIntentService.SENDER_ID);
 
-		if (GCMRegistrar.isRegistered(context)) {
-			String regID = GCMRegistrar.getRegistrationId(context);
-			mostraRegID(regID);
-			Toast.makeText(context,
-					"Dê um clique longo sobre o Registro para selecioná-lo e copiá-lo",
-					Toast.LENGTH_LONG).show();
+		if (!GCMRegistrar.isRegistered(context)) {
+			Log.i(TAG, "Registrando o dispositivo...");
+			GCMRegistrar.register(context, GCMIntentService.SENDER_ID);
+		} else {
+			String registrationId = GCMRegistrar.getRegistrationId(context);
+			iniciaTelaStatusRegistro(registrationId);
 		}
+
 	}
 
-	public void mostraRegID(String regID) {
-		TextView textRegID = (TextView) findViewById(R.id.textRegID);
-		textRegID.setText(regID);
-	}
+	public void desregistraDispositivo(View v) {
+		Context context = Principal.this;
+		
+		if (GCMRegistrar.isRegistered(context)) {
+			Log.i(TAG, "Desregistrando o dispositivo...");
+			GCMRegistrar.unregister(context);
+		} else {
+			Log.i(TAG, "O dispositivo não é registrado.");
+			iniciaTelaStatusRegistro("O dispositivo não é registrado.");
+		}
 
+	}
+	
+	public void iniciaTelaStatusRegistro(String status){
+		Intent intent = new Intent(this, TelaStatusRegistro.class);
+		intent.putExtra("status", status);
+		startActivity(intent);
+	}
+	
+	/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -57,8 +71,11 @@ public class Principal extends Activity {
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
+		} else if (id == R.id.cancelarRegistro) {
+			desregistraDispositivo();
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
+	}*/
 
 }

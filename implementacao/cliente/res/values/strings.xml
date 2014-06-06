@@ -10,5 +10,8 @@
     <string name="mensagem_recebida">Nova mensagem recebida:</string>
     <string name="em_branco">" "</string>
     <string name="hint_regid">Dê um clique longo sobre o texto para selecioná-lo</string>
+    <string name="cancelar_registro">Cancelar Registro</string>
+    <string name="title_activity_tela_exibe_registro">TelaExibeRegistro</string>
+    <string name="status_registro">Status do registro:</string>
 
 </resources>

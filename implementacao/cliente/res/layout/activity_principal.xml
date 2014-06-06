@@ -8,7 +8,7 @@
     tools:context="br.ufg.inf.es.meno.Principal"
     tools:ignore="MergeRootFrame" >
 
- <ImageView
+    <ImageView
         android:id="@+id/imageView1"
         android:layout_width="114dp"
         android:layout_height="109dp"
@@ -20,29 +20,23 @@
         android:layout_width="225dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/bem_vindo"
-        android:layout_margin="20dp" />
+        android:layout_margin="20dp"
+        android:text="@string/bem_vindo" />
 
     <Button
         android:id="@+id/botaoObterRegID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="@string/obter_regid" 
-        android:onClick="registraDispositivo"/>
-
-    <TextView
-        android:id="@+id/textRegID"
-        android:layout_width="match_parent"
+        android:onClick="registraDispositivo"
+        android:text="@string/obter_regid" />
+    
+    <Button
+        android:id="@+id/botaoCancelarRegID"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|center_vertical"
-        android:layout_margin="20dp"
-        android:hint="@string/hint_regid"
-        android:text="@string/em_branco"
-        android:textIsSelectable="true" >
-
-        <requestFocus />
-    </TextView>
+        android:layout_margin="10dp"
+        android:onClick="desregistraDispositivo"
+        android:text="@string/cancelar_registro" />
 
 </LinearLayout>
-

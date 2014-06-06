@@ -16,6 +16,7 @@ import com.google.android.gcm.GCMBaseIntentService;
 public class GCMIntentService extends GCMBaseIntentService {
 	
 	public static final String SENDER_ID = "170735191260"; 
+	private final String TAG = "IntentService";
 	
 	public GCMIntentService() {
 		super(SENDER_ID);
@@ -23,19 +24,36 @@ public class GCMIntentService extends GCMBaseIntentService {
 
 	@Override
 	protected void onRegistered(Context context, String registrationId) {
-		Log.i("MeNo-IntentService", "Registrado: regId=" + registrationId);
+		Log.i(TAG, "Registrado: regId=" + registrationId);
+		Intent intent = new Intent(this, TelaStatusRegistro.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.putExtra("status", registrationId);
+		startActivity(intent);
+		
+		Log.i(TAG, "Dentro do onRegistered");
 	}
 
 	@Override
 	protected void onUnregistered(Context context, String registrationId) {
-		Log.i("MeNo-IntentService", "Desregistrado: regId=" + registrationId);
+		Log.i(TAG, "Desregistrado: regId=" + registrationId);
+		Intent intent = new Intent(this, TelaStatusRegistro.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.putExtra("status", "O registro foi cancelado com sucesso.");
+		startActivity(intent);
+		
+		Log.i(TAG, "Dentro do onUnRegistered");
 	}
 
 	@Override
 	protected void onError(Context context, String errorId) {
-		Log.e("MeNo-IntentService", "Erro: errorId=" + errorId);
+		Log.e(TAG, "Erro: errorId=" + errorId);
+		Intent intent = new Intent(this, TelaStatusRegistro.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.putExtra("status", "Aconteceu um erro.");
+		startActivity(intent);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onMessage(Context context, Intent data) {
 		String message = data.getStringExtra("message");
@@ -50,7 +68,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 		Notification notification = new Notification.Builder(this)
 				.setSmallIcon(R.drawable.meno_envelope)
 				.setWhen(System.currentTimeMillis())
-				.setContentTitle("MeNo - Mensagem Recebida")
+				.setContentTitle("Mensagem Recebida")
 				.setContentText(message).setContentIntent(pIntent)
 				.getNotification();
 
