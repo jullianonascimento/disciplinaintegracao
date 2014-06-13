@@ -63,4 +63,8 @@ public class Mensagem implements Serializable{
 	public void setTime_to_live(int time_to_live) {
 		this.time_to_live = time_to_live;
 	}
+	
+	public int getTamanhoDoTexto(){
+		return data.get("message").getBytes().length;
+	}
 }
