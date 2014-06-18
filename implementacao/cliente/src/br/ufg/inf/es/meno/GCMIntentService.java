@@ -54,12 +54,19 @@ public class GCMIntentService extends GCMBaseIntentService {
 	@Override
 	protected void onMessage(Context context, Intent data) {
 		
+		String title = data.getStringExtra("title");
 		String message = data.getStringExtra("message");
-		Log.i(TAG, "Tamanho do texto em bytes: " +message.getBytes().length);
 		
-		if (message.getBytes().length <= TAMANHO_MAX_MENSAGEM){
+		int tamanhoTitle = title.getBytes().length;
+		int tamanhoTexto = message.getBytes().length;
+		int tamanhoMensagem = tamanhoTitle + tamanhoTexto;
+		
+		Log.i(TAG, "Tamanho da mensagem em bytes: " + tamanhoMensagem);
+		
+		if (tamanhoMensagem <= TAMANHO_MAX_MENSAGEM){
 				
 			Intent intent = new Intent(this, TelaMensagem.class);
+			intent.putExtra("title", title);
 			intent.putExtra("message", message);
 	
 			// Inicia a activity no clique da notificação
@@ -71,7 +78,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 					.setSmallIcon(R.drawable.meno_envelope)
 					.setWhen(System.currentTimeMillis())
 					.setContentTitle("Mensagem Recebida")
-					.setContentText(message).setContentIntent(pIntent)
+					.setContentText(title).setContentIntent(pIntent)
 					.getNotification();
 	
 			// Remove a notificação ao clicar

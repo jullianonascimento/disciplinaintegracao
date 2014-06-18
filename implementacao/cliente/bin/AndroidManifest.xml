@@ -22,7 +22,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="br.ufg.inf.es.meno.Principal"
+            android:name="br.ufg.inf.es.meno.MeNoClientePrincipal"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
             <intent-filter>

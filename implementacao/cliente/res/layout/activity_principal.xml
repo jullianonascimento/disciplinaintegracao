@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="br.ufg.inf.es.meno.Principal"
+    tools:context="br.ufg.inf.es.meno.MeNoClientePrincipal"
     tools:ignore="MergeRootFrame" >
 
     <ImageView

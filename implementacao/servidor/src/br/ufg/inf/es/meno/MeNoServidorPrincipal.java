@@ -3,23 +3,19 @@ package br.ufg.inf.es.meno;
 import java.util.List;
 import java.util.Scanner;
 
-public class Principal {
+public class MeNoServidorPrincipal {
 
 	public static String APIKEY = "AIzaSyDCLhEymszT6nCTjmbgFNrSyWkkDqTGmZY";
 
 	public static void main(String[] args) {
-
 		menu();
-
 	}
 
 	public static void menu() {
-
 		Scanner leNumero = new Scanner(System.in);
 		int opcao = 0;
 
-		System.out
-				.println("---- Bem vindo ao MeNo ---- Aplicação para envio de mensagens ----");
+		System.out.println("---- Bem vindo ao MeNo ---- Aplicação para envio de mensagens ----");
 
 		do {
 			System.out.println("\n1. Enviar mensagem para um assinante");
@@ -76,14 +72,16 @@ public class Principal {
 			nomeAssinante = leString.nextLine();
 		}
 
+		System.out.println("Digite o título da mensagem: ");
+		String tituloMensagem = leString.nextLine();
+		
 		System.out.println("Digite uma mensagem: ");
 		String textoMensagem = leString.nextLine();
 
-		mensagem.createData("Titulo Padrao", textoMensagem);
+		mensagem.createData(tituloMensagem, textoMensagem);
 
 		System.out.println("Enviando Mensagem .....");
 		Postagem.enviaMensagem(APIKEY, mensagem);
-
 	}
 
 	private static void menuListarAssinantes() {
@@ -93,10 +91,13 @@ public class Principal {
 	private static void menuEnviaParaTodos() {
 		Scanner leString = new Scanner(System.in);
 
+		System.out.println("Digite o título da mensagem: ");
+		String tituloMensagem = leString.nextLine();
+		
 		System.out.println("Digite uma mensagem: ");
 		String textoMensagem = leString.nextLine();
 
-		Mensagem mensagem = new Mensagem("Titulo Padrao", textoMensagem);
+		Mensagem mensagem = new Mensagem(tituloMensagem, textoMensagem);
 
 		List<String> conjuntoRegIds = Persistencia.buscaTodosRegIds();
 
@@ -106,10 +107,9 @@ public class Principal {
 
 		System.out.println("Enviando Mensagem .....");
 		Postagem.enviaMensagem(APIKEY, mensagem);
-
 	}
 
-	private static void menuEnviaMensagem() {
+	private static void menuEnviaMensagem() { //para apenas um assinante
 		Scanner leString = new Scanner(System.in);
 
 		System.out.println("Digite o nome do assinante: ");
@@ -119,15 +119,16 @@ public class Principal {
 		if (regId.equals("")) {
 			System.out.println("O registro não foi encontrado.");
 		} else {
+			System.out.println("Digite o título da mensagem: ");
+			String tituloMensagem = leString.nextLine();
+			
 			System.out.println("Digite uma mensagem: ");
 			String textoMensagem = leString.nextLine();
 
-			Mensagem mensagem = new Mensagem(regId, "Titulo Padrao",
-					textoMensagem);
+			Mensagem mensagem = new Mensagem(regId, tituloMensagem,	textoMensagem);
 
 			System.out.println("Enviando Mensagem .....");
 			Postagem.enviaMensagem(APIKEY, mensagem);
 		}
-
 	}
 }

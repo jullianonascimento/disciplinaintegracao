@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Postagem {
@@ -31,10 +32,10 @@ public class Postagem {
 			ObjectMapper mapper = new ObjectMapper();
 			DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
 			mapper.writeValue(wr, mensagem);
-			//System.out.println("Tamanho do DataOutputStream em bytes: " + wr.size());
-			System.out.println("Tamanho do texto em bytes: " + mensagem.getTamanhoDoTexto());
 
-			if (mensagem.getTamanhoDoTexto() <= TAMANHO_MAX_MENSAGEM) {
+			System.out.println("Tamanho da mensagem em bytes = " + mensagem.getTamanhoMensagem());
+			
+			if (mensagem.getTamanhoMensagem() <= TAMANHO_MAX_MENSAGEM) {
 				// Enviando a requisição
 				System.out.println("Enviando a requisição 'POST' para: " + url);
 				wr.flush();
@@ -42,7 +43,7 @@ public class Postagem {
 
 				// Obtendo a resposta
 				int responseCode = conn.getResponseCode();
-				System.out.println("Código da resposta: " + responseCode);
+				System.out.println("Resposta obtida: " + responseCode);
 
 				BufferedReader in = new BufferedReader(new InputStreamReader(
 						conn.getInputStream()));

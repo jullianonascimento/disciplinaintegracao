@@ -7,7 +7,7 @@
     <LinearLayout
         android:id="@+id/layoutTelaMensagem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context="br.ufg.inf.es.meno.TelaMensagem"
         tools:ignore="MergeRootFrame" >
@@ -20,6 +20,14 @@
             android:text="@string/mensagem_recebida"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/exibeTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="@string/em_branco"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/exibeMensagem"

@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.google.android.gcm.GCMRegistrar;
 
-public class Principal extends Activity {
+public class MeNoClientePrincipal extends Activity {
 
 	private final String TAG = "MeNo-Cliente";
 
@@ -24,7 +24,7 @@ public class Principal extends Activity {
 	}
 
 	public void registraDispositivo(View v) {
-		Context context = Principal.this;
+		Context context = MeNoClientePrincipal.this;
 
 		if (!GCMRegistrar.isRegistered(context)) {
 			Log.i(TAG, "Registrando o dispositivo...");
@@ -37,7 +37,7 @@ public class Principal extends Activity {
 	}
 
 	public void desregistraDispositivo(View v) {
-		Context context = Principal.this;
+		Context context = MeNoClientePrincipal.this;
 		
 		if (GCMRegistrar.isRegistered(context)) {
 			Log.i(TAG, "Desregistrando o dispositivo...");
@@ -54,28 +54,5 @@ public class Principal extends Activity {
 		intent.putExtra("status", status);
 		startActivity(intent);
 	}
-	
-	/*
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.principal, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		} else if (id == R.id.cancelarRegistro) {
-			desregistraDispositivo();
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}*/
 
 }
